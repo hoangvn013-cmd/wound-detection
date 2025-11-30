@@ -26,9 +26,3 @@ Dự án xây dựng một hệ thống thị giác máy tính hỗ trợ phân 
 3. **Kết quả:**
    - Accuracy: >90%
    - F1-Score trung bình: >0.85
-
-## 🚀 Hướng dẫn Cài đặt (Installation)
-
-1. Clone repo này về máy:
-   ```bash
-   git clone [https://github.com/username-cua-ban/Wound-Classification-AI.git](https://github.com/username-cua-ban/Wound-Classification-AI.git)
