@@ -1,149 +1,138 @@
-# AI Wound Detection & Classification
+# Wound Detection and Classification Using Deep Learning
 
-Hệ thống nhận diện và phân loại vết thương sử dụng Deep Learning với mô hình ResNet-50 và kỹ thuật Transfer Learning/Fine-tuning.
-
-## Giới thiệu
-
-Dự án xây dựng mô hình AI có khả năng:
-
-* Nhận diện các loại vết thương từ ảnh.
-* Phân loại mức độ tổn thương.
-* Đánh giá hiệu suất bằng Accuracy, Classification Report và Confusion Matrix.
-* Trực quan hóa kết quả dự đoán trên tập kiểm thử.
-
-Mô hình được huấn luyện bằng PyTorch và triển khai trên Google Colab.
+A deep learning project for automatic wound image classification using Transfer Learning with ResNet-50.
 
 ---
 
-## Quy trình thực hiện
+## Overview
 
-### Giai đoạn 1: Chuẩn bị Dataset
+This project aims to develop an Artificial Intelligence system capable of identifying and classifying wound images into different severity levels. The model leverages a pretrained ResNet-50 architecture and applies transfer learning techniques to achieve high classification performance on medical image datasets.
 
-* Đọc dữ liệu ảnh từ thư mục dataset.
-* Đọc file XML annotation.
-* Trích xuất nhãn (label) của từng ảnh.
-* Phân loại mức độ nghiêm trọng:
+The project covers the complete machine learning workflow, including:
 
-  * Mild
-  * Moderate
-  * Severe
-* Tạo file metadata CSV.
-* Chia dữ liệu:
-
-  * Train: 70%
-  * Validation: 20%
-  * Test: 10%
+* Data preprocessing
+* Dataset annotation processing
+* Data augmentation
+* Model training
+* Model evaluation
+* Performance visualization
 
 ---
 
-### Giai đoạn 2: Tiền xử lý ảnh
+## Objectives
 
-* Resize ảnh về kích thước chuẩn.
-* Chuẩn hóa dữ liệu (Normalization).
-* Data Augmentation:
-
-  * Random Flip
-  * Random Rotation
-  * Random Crop
-
-Mục tiêu:
-
-* Giảm hiện tượng Overfitting.
-* Tăng khả năng tổng quát hóa của mô hình.
+* Automatically classify wound images based on severity.
+* Apply transfer learning using a pretrained ResNet-50 model.
+* Evaluate model performance using standard classification metrics.
+* Visualize training and testing results.
 
 ---
 
-### Giai đoạn 3: Xây dựng mô hình
+## Dataset Preparation
 
-Sử dụng:
+The dataset consists of:
+
+* Wound images (.jpg, .png)
+* XML annotation files
+
+### Data Processing Steps
+
+1. Load wound images.
+2. Parse XML annotation files.
+3. Extract wound labels.
+4. Generate metadata.
+5. Split data into:
+
+   * Training Set (70%)
+   * Validation Set (20%)
+   * Test Set (10%)
+
+---
+
+## Image Preprocessing
+
+The following preprocessing techniques are applied:
+
+* Image resizing
+* Normalization
+* Random horizontal flipping
+* Random rotation
+* Data augmentation
+
+These techniques help improve model generalization and reduce overfitting.
+
+---
+
+## Model Architecture
+
+The project uses **ResNet-50**, a convolutional neural network pretrained on the ImageNet dataset.
+
+### Transfer Learning Strategy
+
+* Load pretrained ImageNet weights.
+* Replace the final fully connected layer.
+* Fine-tune the network on wound image data.
+
+### Frameworks
 
 * PyTorch
 * Torchvision
-* ResNet-50 Pretrained trên ImageNet
-
-Transfer Learning:
-
-* Tải trọng số pretrained.
-* Thay thế lớp Fully Connected cuối cùng.
-* Fine-tuning toàn bộ mạng để phù hợp với bài toán phân loại vết thương.
 
 ---
 
-### Giai đoạn 4: Huấn luyện
+## Training Configuration
 
-Thông số huấn luyện:
-
-| Tham số       | Giá trị             |
-| ------------- | ------------------- |
-| Optimizer     | Adam                |
-| Learning Rate | 0.0001              |
-| Loss Function | CrossEntropyLoss    |
-| Batch Size    | 32                  |
-| Epochs        | 20                  |
-| GPU           | CUDA (Google Colab) |
+| Parameter     | Value              |
+| ------------- | ------------------ |
+| Model         | ResNet-50          |
+| Optimizer     | Adam               |
+| Learning Rate | 0.0001             |
+| Loss Function | CrossEntropyLoss   |
+| Batch Size    | 32                 |
+| Epochs        | 20                 |
+| Hardware      | GPU (Google Colab) |
 
 ---
 
-### Giai đoạn 5: Đánh giá mô hình
+## Evaluation Metrics
 
-Các chỉ số đánh giá:
+Model performance is evaluated using:
 
 * Accuracy
 * Precision
 * Recall
-* F1-score
+* F1-Score
 * Confusion Matrix
 
-Thư viện sử dụng:
+The project also generates:
 
-```python
-sklearn.metrics
-```
-
----
-
-### Giai đoạn 6: Trực quan hóa
-
-Hiển thị:
-
-* Accuracy theo Epoch
-* Loss theo Epoch
-* Confusion Matrix
-* Ảnh dự đoán đúng/sai
+* Classification Reports
+* Training Accuracy Curves
+* Validation Accuracy Curves
+* Loss Curves
 
 ---
 
-## Cấu trúc thư mục
+## Results
 
-```text
-Wound_Project/
-│
-├── imgs/
-│   ├── image1.jpg
-│   ├── image2.jpg
-│   └── ...
-│
-├── annotations/
-│   ├── image1.xml
-│   ├── image2.xml
-│   └── ...
-│
-├── metadata_wound.csv
-│
-├── Ai_nhận_diện_vết_thương_và_phân_loại.ipynb
-│
-└── README.md
-```
+The pretrained ResNet-50 model significantly improves classification performance by leveraging knowledge learned from ImageNet.
+
+Benefits include:
+
+* Faster convergence
+* Reduced training time
+* Improved classification accuracy
+* Better feature extraction capability
 
 ---
 
-## Công nghệ sử dụng
+## Technologies Used
 
 * Python
 * PyTorch
 * Torchvision
-* Pandas
 * NumPy
+* Pandas
 * Matplotlib
 * Seaborn
 * Scikit-Learn
@@ -151,16 +140,40 @@ Wound_Project/
 
 ---
 
-## Cài đặt
+## Project Structure
 
-Clone repository:
-
-```bash
-git clone https://github.com/your-username/wound-detection.git
-cd wound-detection
+```text
+Wound-Classification/
+│
+├── imgs/
+│   ├── image_01.jpg
+│   ├── image_02.jpg
+│   └── ...
+│
+├── annotations/
+│   ├── image_01.xml
+│   ├── image_02.xml
+│   └── ...
+│
+├── metadata_wound.csv
+│
+├── Ai_nhan_dien_vet_thuong_va_phan_loai.ipynb
+│
+└── README.md
 ```
 
-Cài đặt thư viện:
+---
+
+##  Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/wound-classification.git
+cd wound-classification
+```
+
+Install dependencies:
 
 ```bash
 pip install torch torchvision pandas numpy matplotlib seaborn scikit-learn tqdm
@@ -168,45 +181,43 @@ pip install torch torchvision pandas numpy matplotlib seaborn scikit-learn tqdm
 
 ---
 
-## Chạy dự án
+## Usage
 
-Mở notebook:
+Open the Jupyter Notebook:
 
 ```bash
-Ai_nhận_diện_vết_thương_và_phân_loại.ipynb
+jupyter notebook Ai_nhan_dien_vet_thuong_va_phan_loai.ipynb
 ```
 
-Thực hiện tuần tự các cell:
+Run all cells sequentially:
 
-1. Chuẩn bị dữ liệu
-2. Tiền xử lý ảnh
-3. Tạo Dataset/DataLoader
-4. Khởi tạo ResNet-50
-5. Train Model
-6. Đánh giá kết quả
-
----
-
-##  Kết quả
-
-Mô hình sử dụng Transfer Learning từ ResNet-50 giúp:
-
-* Giảm thời gian huấn luyện.
-* Tận dụng tri thức từ ImageNet.
-* Cải thiện độ chính xác trên tập dữ liệu vết thương.
-
-Kết quả cuối cùng được đánh giá bằng Accuracy, Classification Report và Confusion Matrix.
+1. Data preprocessing
+2. Dataset creation
+3. Model initialization
+4. Training
+5. Evaluation
+6. Visualization
 
 ---
 
-##  Tác giả
+## Future Improvements
 
-**Hoàng Ngô Việt**
+* Implement wound segmentation.
+* Deploy the model as a web application using Streamlit.
+* Support real-time wound assessment.
+* Expand the dataset with additional wound categories.
+* Integrate explainable AI techniques (Grad-CAM).
 
-Sinh viên Trường Đại học Khoa học Tự nhiên - ĐHQGHN
+---
+
+## Author
+
+**Hoang Ngo Viet**
+
+Student at Hanoi University of Science (VNU-HUS)
 
 ---
 
 ## License
 
-Dự án phục vụ mục đích học tập và nghiên cứu.
+This project is developed for educational and research purposes.
